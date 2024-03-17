@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <script>
+    function submitForm() {
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+
+        fetch("/submit_form", {
+            method: "POST",
+            body: new URLSearchParams({ title, description }),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data.message))
+        .catch(error => console.error("Error:", error));
+    }
+</script>
+</head>
+<body>
+    <form>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title"><br>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description"><br>
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+</body>
+</html>
